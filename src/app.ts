@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 import cors from 'cors';
-
 import globalHandler from './app/middleware/globalHandler';
 import router from './app/routes';
+import notFund from './app/middleware/notFount';
 
 const app: Application = express();
 
@@ -16,6 +16,9 @@ app.use(cors());
 app.use('/api/v1/', router);
 
 app.use(globalHandler);
+
+//not fund route--------
+app.use(notFund)
 
 // console.log(process.cwd())
 export default app;

@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StudentServices } from './student.service';
+import sendResponse from '../../utils/sendResponse';
+import httpStatus from 'http-status';
 
 // import studentValidationSchema from './student.validation';
 
@@ -10,10 +12,12 @@ const getAllStudents = async (
 ) => {
   try {
     const result = await StudentServices.getAllStudentsFromDB();
-    res.status(200).json({
-      success: true,
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
       message: 'Students are retrieved successfully',
       data: result,
+      success: true,
     });
   } catch (error) {
     next(error);
@@ -28,10 +32,12 @@ const getSingleStudent = async (
   try {
     const { studentId } = req.params;
     const result = await StudentServices.getSingleStudentFromDB(studentId);
-    res.status(200).json({
-      success: true,
+
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
       message: 'Student is retrieved successfully',
       data: result,
+      success: true,
     });
   } catch (error) {
     next(error);
@@ -41,10 +47,11 @@ const getSingleStudent = async (
 const deleteSingleStudent = async (req: Request, res: Response) => {
   const { studentId } = req.params;
   const result = await StudentServices.deleteSingleStudentFromDB(studentId);
-  res.status(200).json({
-    success: true,
-    message: 'student is deleted successfully',
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    message: 'delete student successfully',
     data: result,
+    success: true,
   });
 };
 
@@ -57,10 +64,11 @@ const deleteSingleStudentByUpdate = async (
     const { studentId } = req.params;
     const result =
       await StudentServices.deleteSingleStudentByUpdateDB(studentId);
-    res.status(200).json({
-      success: true,
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
       message: 'delete student successfully',
       data: result,
+      success: true,
     });
   } catch (error) {
     next(error);

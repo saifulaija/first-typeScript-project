@@ -5,6 +5,8 @@ import { Request, Response, NextFunction } from 'express';
 
 
 
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 const globalHandler=(error:any, req:Request, res:Response, next:NextFunction)=>{
      const statusCode=500;
