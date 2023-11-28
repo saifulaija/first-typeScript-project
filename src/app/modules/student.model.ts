@@ -69,7 +69,7 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
         message: '{VALUE} is not a valid email',
       },
     },
-    dateOfBirth: { type: String, required: true },
+    dateOfBirth: { type: String },
     contactNo: { type: String, required: true },
     emergencyNo: { type: String, required: true },
     bloodGroup: {
@@ -88,6 +88,10 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     profileImg: { type: String },
+    admissionSemester:{
+      type:Schema.Types.ObjectId,
+      ref:'AcademicSemester'
+    },
 
     isDeleted: {
       type: Boolean,
