@@ -6,7 +6,8 @@ import catchAsync from '../../utils/catchAsync';
 // import studentValidationSchema from './student.validation';
 
 const getAllStudents = catchAsync(async (req, res) => {
-  const result = await StudentServices.getAllStudentsFromDB();
+  console.log(req.query);
+  const result = await StudentServices.getAllStudentsFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -28,17 +29,6 @@ const getSingleStudent = catchAsync(async (req, res) => {
   });
 });
 
-const deleteSingleStudent = catchAsync(async (req, res) => {
-  const { studentId } = req.params;
-  const result = await StudentServices.deleteSingleStudentFromDB(studentId);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    message: 'delete student successfully',
-    data: result,
-    success: true,
-  });
-})
-
 const deleteSingleStudentByUpdate = catchAsync(async (req, res) => {
   const { studentId } = req.params;
   const result = await StudentServices.deleteSingleStudentByUpdateDB(studentId);
@@ -50,9 +40,21 @@ const deleteSingleStudentByUpdate = catchAsync(async (req, res) => {
   });
 });
 
+const updateStudent = catchAsync(async (req, res) => {
+  const { studentId } = req.params;
+  const { student } = req.body;
+  const result = await StudentServices.updateStudentInToDB(studentId, student);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'student update successfully',
+    data: result,
+  });
+});
+
 export const StudentController = {
   getAllStudents,
   getSingleStudent,
-  deleteSingleStudent,
   deleteSingleStudentByUpdate,
+  updateStudent,
 };

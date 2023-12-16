@@ -18,7 +18,7 @@ app.use('/api/v1/', router);
 app.use(globalHandler);
 
 //not fund route--------
-app.use(notFund)
+app.use(notFund);
 
 // console.log(process.cwd())
 export default app;

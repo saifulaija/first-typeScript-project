@@ -88,14 +88,18 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     profileImg: { type: String },
-    admissionSemester:{
-      type:Schema.Types.ObjectId,
-      ref:'AcademicSemester'
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
     },
 
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    academicDepartment: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicDepartment',
     },
   },
   {
@@ -108,7 +112,7 @@ const StudentSchema = new Schema<TStudent, StudentModel>(
 //virtual-----
 
 StudentSchema.virtual('fullName').get(function () {
-  return `${this.name.firstName} ${this.name.lastName}`;
+  return `${this?.name?.firstName} ${this?.name?.lastName}`;
 });
 
 //query middleware or hook-------
